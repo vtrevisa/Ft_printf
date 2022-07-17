@@ -1,26 +1,34 @@
 #VARIABLES
-LIB		= libft.a
-EXEC	= a.out
 SRC		= ft_printf.c 
-MAIN	= ft_printf_main.c
 OBJ		=	$(SRC:.c=.o)
-NAME		= libfprintft.a
-CFLAGS	= -Wall -Wextra -Werror
-SUBDIRS	= libft
+
+LIBFT		= libft.a
+SUBDIRS	= ./libft/
+
+EXEC	= a.out
+CFLAGS	= -Wall -Wextra -Werror -I.
+
+MAIN	= ft_printf_main.c
+NAME		= libftprintf.a
 
 #FUNCTIONS
 all:	$(EXEC)
 	./$(EXEC)
 
-$(EXEC): $(NAME) $(LIB)
-	gcc $(CFLAGS) $(MAIN) $(LIB) $(NAME)
+$(EXEC): $(LIBFT) $(NAME) 
+	cc $(MAIN) $(SUBDIRS)$(LIBFT) $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rcs $(NAME) $(OBJ)
+	cp $(SUBDIRS)/$(LIBFT) $(NAME)
+	ar -rcs $@ $^
 
-$(LIB):
+$(LIBFT):
 	$(MAKE) bonus -C $(SUBDIRS)
-	cd libft && mv libft.a ./..
-	cd ..
+
+clean:
+	rm -rf *.o
+
+fclean: clean
+	rm -rf *.a
 
 .PHONY: subdirs $(SUBDIRS)
