@@ -1,12 +1,12 @@
 #VARIABLES
-SRC		= ft_printf.c 
+SRC		= ft_printf.c printpointer_fd.c
 OBJ		=	$(SRC:.c=.o)
 
 LIBFT		= libft.a
 SUBDIRS	= ./libft/
 
 EXEC	= a.out
-CFLAGS	= -Wall -Wextra -Werror -I.
+CFLAGS	= -Wall -Wextra -Werror -I. -g
 
 MAIN	= ft_printf_main.c
 NAME		= libftprintf.a
