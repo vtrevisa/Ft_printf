@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printpointer_fd.c                                  :+:      :+:    :+:   */
+/*   printhex_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 19:28:48 by vitor             #+#    #+#             */
-/*   Updated: 2022/07/24 19:29:37 by vitor            ###   ########.fr       */
+/*   Created: 2022/07/24 19:28:04 by vitor             #+#    #+#             */
+/*   Updated: 2022/07/24 19:28:32 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	hexabase(int num, int flag)
 	return (base[num]);
 }
 
-int	hexlen(unsigned long int lli)
+static int	hexlen(unsigned long int lli)
 {
 	int	result;
 
@@ -54,7 +54,7 @@ static void	*makestr(unsigned long int lli, int position, int flag)
 	return (str);
 }
 
-char	*htoa(unsigned long int lli, int flag)
+static char	*htoa(unsigned long int lli, int flag)
 {	
 	char	*str;
 	int		dig;
@@ -64,16 +64,12 @@ char	*htoa(unsigned long int lli, int flag)
 	return (str);
 }
 
-void	printpointer_fd(unsigned long int lli, int fd, int flag)
+void	printhex_fd(unsigned long int lli, int fd, int flag)
 {	
 	char	*str;
 
-	if (flag == 2 && lli != 0)
-		ft_putstr_fd ("0x", 1);
-	if (lli == 0 && flag == 2)
-		str = ft_strdup("(nil)");
-	else
-		str = htoa(lli, flag);
+	ft_putstr_fd ("0x", 1);
+	str = htoa(lli, flag);
 	ft_putstr_fd (str, fd);
 	free (str);
 }

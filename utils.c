@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   htoa.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 20:22:53 by vitor             #+#    #+#             */
-/*   Updated: 2022/07/19 20:35:52 by vitor            ###   ########.fr       */
+/*   Created: 2022/07/24 19:19:00 by vitor             #+#    #+#             */
+/*   Updated: 2022/07/24 19:24:55 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "ft_printf.h"
 
-static char	countdigit(long long int n)
+int	countdigit(int n)
 {
-	int	nb;
-	int	result;
+	long int	nb;
+	int			result;
 
 	nb = n;
 	result = 0;
@@ -25,38 +25,47 @@ static char	countdigit(long long int n)
 		nb *= -1;
 		result++;
 	}
-	while (nb >= 16)
+	while (nb >= 10)
 	{
-		nb = nb / 16;
+		nb = nb / 10;
 		result++;
 	}
-	if (nb < 16)
+	if (nb < 10)
 		result++;
 	return (result);
 }
 
-static void	makestr(long long int n, char *str, int position)
+int	countudigit(unsigned int n)
 {
-	str[position + 1] = 0;
-	while (n >= 16)	
+	unsigned int	nb;
+	int				result;
+
+	nb = n;
+	result = 0;
+	while (nb >= 10)
 	{
-		str[position--] = (n % 16) + 48;
-		n /= 16;
+		nb = nb / 10;
+		result++;
 	}
-	str[position--] = n + 48;
+	if (nb < 10)
+		result++;
+	return (result);
 }
 
-char	*htoa(long long int n)
-{	
-	char	*str;
-	int		dig;
-	int		position;
+static void	ft_if_normal(unsigned int n, int fd)
+{
+	if (n >= 10)
+	{
+		ft_if_normal(n / 10, fd);
+		n %= 10;
+	}
+	if (n < 10)
+	{
+		ft_putchar_fd(n + 48, fd);
+	}
+}
 
-	dig = countdigit(n);
-	str = malloc (dig + 1);
-	if (!str)
-		return (NULL);
-	position = dig - 1;
-	makestr(n, str, position);
-	return (str);
+void	ft_putunbr_fd(unsigned int n, int fd)
+{
+	ft_if_normal(n, fd);
 }
