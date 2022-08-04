@@ -1,12 +1,12 @@
 #VARIABLES
-SRC		=	ft_printf.c printpointer_fd.c utils.c handlechar.c handlestr.c handlepointer.c \
-			handleints.c handleunsigned.c handlehex.c
+SRC		=	./src/ft_printf.c ./src/printpointer_fd.c ./src/utils.c ./src/handlechar.c \
+			./src/handlestr.c ./src/handlepointer.c ./src/handleints.c ./src/handleunsigned.c\
+			./src/handlehex.c
 OBJ		=	$(SRC:.c=.o)
 
 LIBFT		= libft.a
-SUBDIRS	= ./libft/
+SUBDIRS	= ./libft
 
-EXEC	= a.out
 CFLAGS	= -Wall -Wextra -Werror -I. -g
 FLAGS	= -Wall -Wextra -Werror
 
@@ -14,23 +14,24 @@ MAIN	= ft_printf_main.c
 NAME	= libftprintf.a
 
 #FUNCTIONS
-all:	$(EXEC)
-	./$(EXEC)
-
-$(EXEC): $(LIBFT) $(NAME) 
-	cc $(MAIN) $(SUBDIRS)$(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJ)
-	cp $(SUBDIRS)/$(LIBFT) $(NAME)
+	mv $(SUBDIRS)/$(LIBFT) $(NAME)
 	ar -rcs $@ $^
 
 $(LIBFT):
 	$(MAKE) bonus -C $(SUBDIRS)
 
 clean:
-	rm -rf *.o
+	rm -rf $(NAME)
 
 fclean: clean
-	rm -rf *.a $(EXEC)
+	cd libft && rm -rf *.o
+	cd ..
+	cd src && rm -rf *.o
+	cd ..
 
-.PHONY: subdirs $(SUBDIRS)
+re: fclean all
+
+.PHONY: all clean fclean

@@ -6,7 +6,7 @@
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 19:19:00 by vitor             #+#    #+#             */
-/*   Updated: 2022/07/24 19:24:55 by vitor            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:33:48 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,15 @@ int	countudigit(unsigned int n)
 	return (result);
 }
 
-static void	ft_if_normal(unsigned int n, int fd)
+void	ft_putunbr_fd(unsigned int n, int fd)
 {
 	if (n >= 10)
 	{
-		ft_if_normal(n / 10, fd);
+		ft_putunbr_fd(n / 10, fd);
 		n %= 10;
 	}
 	if (n < 10)
 	{
 		ft_putchar_fd(n + 48, fd);
 	}
-}
-
-void	ft_putunbr_fd(unsigned int n, int fd)
-{
-	ft_if_normal(n, fd);
 }
