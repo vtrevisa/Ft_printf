@@ -6,7 +6,7 @@
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 19:33:25 by vitor             #+#    #+#             */
-/*   Updated: 2022/08/21 15:51:13 by vitor            ###   ########.fr       */
+/*   Updated: 2022/08/21 20:23:20 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ static int	checkerror(const char *str)
 	}
 	return (-1);
 }
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	int		position;
 	int		ret;
-	
+
 	va_start(ap, str);
 	position = 0;
 	ret = 0;
