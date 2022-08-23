@@ -10,7 +10,6 @@ SUBDIRS	= ./libft
 CFLAGS	= -Wall -Wextra -Werror -I. -g
 FLAGS	= -Wall -Wextra -Werror
 
-MAIN	= ft_printf_main.c
 NAME	= libftprintf.a
 
 #FUNCTIONS
