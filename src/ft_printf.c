@@ -6,7 +6,7 @@
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 19:33:25 by vitor             #+#    #+#             */
-/*   Updated: 2022/08/21 20:23:20 by vitor            ###   ########.fr       */
+/*   Updated: 2022/08/23 17:44:50 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ int	conversions(char c, va_list ap)
 	return (ret);
 }
 
-static int	checkerror(const char *str)
-{
-	while (*str)
-	{
-		if ((*str >= '\t' && *str <= '\r') || (*str == ' ' || *str == 0))
-			str++;
-		else
-			return (1);
-	}
-	return (-1);
-}
-
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
@@ -60,17 +48,10 @@ int	ft_printf(const char *str, ...)
 	ret = 0;
 	while (str[position])
 	{
-		if (str[position] == '%')
-		{
-			if (checkerror(&str[position + 1]) == -1)
-				return (-1);
-			if (ft_strchr("cspdiuxX%", str[position + 1]))
-				ret += conversions(str[++position], ap);
-			else
-				ret += write (1, &str[position], 1);
-		}
-		else if (str[position])
+		if (str[position] != '%')
 			ret += write(1, &str[position], 1);
+		if (str[position] == '%')
+			ret += conversions(str[++position], ap);
 		position++;
 	}
 	va_end(ap);

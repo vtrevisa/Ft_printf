@@ -6,12 +6,13 @@
 /*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 19:29:44 by vitor             #+#    #+#             */
-/*   Updated: 2022/07/24 19:30:44 by vitor            ###   ########.fr       */
+/*   Updated: 2022/08/26 17:05:17 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+#include "./libft/libft.h"
 # include <unistd.h>
 # include <stdarg.h>
 
